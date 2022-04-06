@@ -1,4 +1,4 @@
-package org.cyk.quarkus.extension.core_;
+package org.cyk.quarkus.extension.core_.configuration;
 
 import java.io.Serializable;
 
