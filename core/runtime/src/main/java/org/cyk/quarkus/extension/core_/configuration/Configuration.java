@@ -1,9 +1,12 @@
 package org.cyk.quarkus.extension.core_.configuration;
 
 import java.io.Serializable;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.RegExUtils;
 import org.cyk.utility.__kernel__.number.NumberHelper;
+
+import io.smallrye.config.WithDefault;
 
 public interface Configuration {
 
@@ -30,6 +33,51 @@ public interface Configuration {
 		@Override
 		Long __convert__(String value) {
 			return NumberHelper.getLong(value,0l);
+		}
+	}
+	
+	/******************************************************************************************************************************/
+	
+	public interface Batch {
+		@WithDefault("2000")
+		Integer size();
+	}
+	
+	public interface Executor {
+
+		Timeout timeout();
+		
+		public interface Timeout {
+			@WithDefault("5")
+			Long duration();
+			
+			@WithDefault("MINUTES")
+			TimeUnit unit();
+		}
+		
+		Thread thread();
+		
+		public interface Thread {
+			@WithDefault("4")
+			Integer count();
+		}
+	}
+
+	public interface Processing {
+
+		@WithDefault("true")
+		Boolean sequential();
+		
+		Executor executor();
+		
+		Batch batch();
+		
+		public interface Copy {
+
+		}
+		
+		public interface Importation extends Processing {
+
 		}
 	}
 }
