@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.cyk.utility.__kernel__.log.LogHelper;
-import org.cyk.utility.__kernel__.map.MapHelper;
 import org.cyk.utility.__kernel__.string.StringHelper;
 import org.cyk.utility.__kernel__.value.ValueHelper;
 import org.eclipse.microprofile.config.ConfigValue;
@@ -99,8 +98,6 @@ public class ConfigSourceFactory implements io.smallrye.config.ConfigSourceFacto
 	            resultSet.close();
 	            preparedStatement.close();
 	            connection.close();
-	            if(MapHelper.isEmpty(map))
-	            	return null;
 	            LogHelper.logInfo(String.format("Configuration from data source : %s", map), getClass());
 				return new PropertiesConfigSource(map, getJdbcName(configSourceContext), 900);
 			}
