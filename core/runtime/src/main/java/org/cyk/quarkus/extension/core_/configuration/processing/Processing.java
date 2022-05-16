@@ -9,7 +9,7 @@ import io.smallrye.config.WithDefault;
 
 public interface Processing {
 
-	@WithDefault("0 */30 * ? * *")
+	@WithDefault("0 */10 * ? * *")
 	@WithConverter(Configuration.StringConverter.class)
 	String cron();
 	
