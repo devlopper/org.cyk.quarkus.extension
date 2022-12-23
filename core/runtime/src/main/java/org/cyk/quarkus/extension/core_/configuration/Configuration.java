@@ -6,10 +6,15 @@ import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.RegExUtils;
 import org.cyk.utility.__kernel__.number.NumberHelper;
 
+import io.smallrye.config.WithConverter;
 import io.smallrye.config.WithDefault;
 
 public interface Configuration {
 
+	Application application();
+	
+	/**/
+	
 	static abstract class AbstractConverter<T> implements  org.eclipse.microprofile.config.spi.Converter<T> ,Serializable{
 		public static final String SPACE_MARKER = "__CHAR__SPACE__";
 	    @Override
@@ -38,9 +43,34 @@ public interface Configuration {
 	
 	/******************************************************************************************************************************/
 	
+	public interface Duration {
+		@WithDefault("5")
+		Long value();
+		
+		@WithDefault("MINUTES")
+		TimeUnit unit();
+	}
+	
+	public interface Pause {
+		@WithDefault("false")
+		Boolean enabled();
+		
+		Duration duration();
+	}
+	
+	public interface Application {
+		@WithDefault("SYSTEME")
+		@WithConverter(StringConverter.class)
+		String identifier();
+	}
+	
 	public interface Batch {
 		@WithDefault("2000")
 		Integer size();
+		
+		Pause pauseBefore();
+		
+		Pause pauseAfter();	
 	}
 	
 	public interface Executor {
