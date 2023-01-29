@@ -27,6 +27,7 @@ public interface Profile {
 		if(Boolean.TRUE.equals(loadScriptSettable))
 			setLoadScript(config, classes);
 		if(Boolean.TRUE.equals(portSettable))
+			/* Port will not be set to enable parallel run : Because we do not know how to get dynamic port controller wont work. So for now we fixed it.*/
 			setPort(config, 8081);
 		return config;
 	}
