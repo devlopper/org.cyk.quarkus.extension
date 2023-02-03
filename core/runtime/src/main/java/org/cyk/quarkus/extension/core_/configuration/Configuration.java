@@ -8,10 +8,10 @@ import org.cyk.utility.__kernel__.number.NumberHelper;
 
 import io.smallrye.config.WithConverter;
 import io.smallrye.config.WithDefault;
-
+@Deprecated
 public interface Configuration {
 
-	Application application();
+	//Application application();
 	
 	/**/
 	
